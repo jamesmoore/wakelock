@@ -1,7 +1,7 @@
 console.clear();
 
 // status paragraph
-const statusElem = document.querySelector('#status p');
+const statusElem = document.querySelector('#status h2');
 // toggle button
 const wakeButton = document.querySelector('[data-status]');
 // checkbox
@@ -12,7 +12,11 @@ const changeUI = (status = 'acquired') => {
   const acquired = status === 'acquired' ? true : false;
   wakeButton.dataset.status = acquired ? 'on' : 'off';
   wakeButton.textContent = `Turn Wake Lock ${acquired ? 'OFF' : 'ON'}`;
-  statusElem.textContent = `Wake Lock ${acquired ? 'is active!' : 'has been released.'}`;
+  wakeButton.setAttribute('aria-pressed', acquired.toString());
+  statusElem.textContent = `${acquired ? '✅' : '❌'} Wake Lock ${acquired ? 'is active!' : 'has been released.'}`;
+  statusElem.classList.remove('wake-on', 'wake-off');
+  statusElem.classList.add(acquired ? 'wake-on' : 'wake-off');
+  document.title = acquired ? "✅ Wake Lock ON" : "❌ Wake Lock OFF";
 }
 
 // test support
@@ -23,7 +27,7 @@ if ('wakeLock' in navigator) {
   statusElem.textContent = 'Screen Wake Lock API supported 🎉';
 } else {
   wakeButton.disabled = true;
-  statusElem.textContent = 'Wake lock is not supported by this browser.';
+  statusElem.textContent = '⚠️ Wake lock is not supported by this browser.';
 }
 
 if (isSupported) {
@@ -45,6 +49,7 @@ if (isSupported) {
       wakeLock.addEventListener('release', () => {
         // if wake lock is released alter the button accordingly
         changeUI('released');
+
       });
 
     } catch (err) {
@@ -75,12 +80,15 @@ if (isSupported) {
     }
   }
 
-  reaquireCheck.addEventListener('change', () => {
+  const reaquireCheckHandler = () => {
     if (reaquireCheck.checked) {
       document.addEventListener('visibilitychange', handleVisibilityChange);
     } else {
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     }
-  });
+  }
 
+  reaquireCheck.addEventListener('change', reaquireCheckHandler);
+
+  reaquireCheckHandler();
 } // isSupported
