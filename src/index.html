@@ -1,50 +1,58 @@
 <!DOCTYPE html>
-<html lang="en" >
-<head>
-  <meta charset="UTF-8">
-  <link rel="icon" type="image/png" href="favicon.png" />
-  <link href="manifest.json" rel="manifest" />  
-  <title>Wake Lock Demo</title>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
-	
-	<!-- my styles -->
-	<link rel="stylesheet" href="moz.css">
+<html lang="en">
 
-	<style>
-		#status {
-			width: 50vw; min-width: 500px;
-			margin-top: 20px;
-		}
-		#status h2 {margin-top: 0px;}
-		#status p {padding-left: 20px;}
-		[data-status="off"] ~ #status {
-			border: 2px solid red;
-		}
-		[data-status="on"] ~ #status {
-			border: 2px solid green;
-		}
-	</style>
+<head>
+	<meta charset="UTF-8">
+	<link rel="icon" type="image/png" href="favicon.png" />
+	<link href="manifest.json" rel="manifest" />
+	<title>Wake Lock</title>
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.colors.min.css">
 
 	<script src="script.js" defer></script>
+	<style>
+		#status {
+			margin-top: 1.5rem;
+		}
 
+		.wake-on {
+			transition: color 0.3s ease-in-out;
+			color: var(--pico-color-green-500);
+		}
+
+		.wake-off {
+			transition: color 0.3s ease-in-out;
+			color: var(--pico-color-red-500);
+		}
+	</style>
 </head>
+
 <body>
-	<header>
-		<h1>Wake Lock Demo</h1>
-	</header>
+	<main class="container">
+		<header>
+			<h1>Wake Lock</h1>
+		</header>
 
-	<p>The button below changes depending on whether wake lock is active or not.</p>
+		<section>
+			<p>The button below changes depending on whether wake lock is active or not.</p>
+			<button data-status="off" aria-pressed="false">Turn Wake Lock ON</button>
+		</section>
 
-	<button data-status="off">Turn Wake Lock ON</button>
+		<section id="status">
+			<h2 aria-live="polite">Wake Lock Status...</h2>
+		</section>
 
-	<section id="status">
-		<h2>Wake Lock Status</h2>
-		<p></p>
-	</section>
-	
-	<p>Wake lock will automatically release if if the tab becomes inactive.</p>
-	<p>To re-activate the wake lock automatically when the tab becomes active again, check this box: <input type="checkbox" id="reaquire" /></p>
-
-
+		<section>
+			<p>Wake lock will automatically release if if the tab becomes inactive.</p>
+			<p>
+				<label>
+					To re-activate the wake lock automatically when the tab becomes active again, check this box: <input
+						type="checkbox" id="reaquire" role="switch" checked />
+				</label>
+			</p>
+		</section>
+	</main>
 </body>
+
 </html>
