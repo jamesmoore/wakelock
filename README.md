@@ -6,7 +6,7 @@ Browser based keep alive to prevent sleep mode. Derived from https://github.com/
 
 The wake lock will be maintained so long as the browser tab is 
 * not covered by another maximized window
-* hot behind another browser tab (install as a PWA to avoid this)
+* not behind another browser tab (install as a PWA to avoid this)
 
 # Usage
 Docker compose:
