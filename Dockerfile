@@ -10,4 +10,4 @@ WORKDIR /home/static
 COPY /src/ .
 
 # Run BusyBox httpd
-CMD ["busybox", "httpd", "-f", "-v", "-p", "80", "-m", "/mime.types"]
+CMD ["busybox", "httpd", "-f", "-v", "-p", "80"]
