@@ -3,54 +3,67 @@
 
 <head>
 	<meta charset="UTF-8">
+	<meta name="color-scheme" content="light dark">
 	<link rel="icon" type="image/png" href="favicon.png" />
 	<link href="manifest.webmanifest" rel="manifest" />
 	<title>Wake Lock</title>
 
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.colors.min.css">
-
+	<script src="https://cdn.tailwindcss.com"></script>
 	<script src="script.js" defer></script>
-	<style>
-		#status {
-			margin-top: 1.5rem;
+	<style type="text/tailwindcss">
+		:root {
+			--wake-on: theme(colors.emerald.600);
+			--wake-off: theme(colors.red.600);
 		}
+	</style>
 
+	<style>
 		.wake-on {
 			transition: color 0.3s ease-in-out;
-			color: var(--pico-color-green-500);
+			color: var(--wake-on);
 		}
 
 		.wake-off {
 			transition: color 0.3s ease-in-out;
-			color: var(--pico-color-red-500);
+			color: var(--wake-off);
 		}
 	</style>
 </head>
 
-<body>
-	<main class="container">
+<body class="min-h-screen bg-neutral-50 text-neutral-900 antialiased dark:bg-neutral-950 dark:text-neutral-100">
+	<main class="mx-auto flex w-full max-w-2xl flex-col gap-8 px-4 py-6">
 		<header>
-			<h1>Wake Lock</h1>
+			<h1 class="text-3xl font-semibold tracking-tight">Wake Lock</h1>
 		</header>
 
-		<section>
-			<p>The button below changes depending on whether wake lock is active or not.</p>
-			<button data-status="off" aria-pressed="false">Turn Wake Lock ON</button>
+		<section
+			class="space-y-4 rounded-2xl border border-neutral-200 bg-white p-4 shadow-sm dark:border-neutral-800 dark:bg-neutral-900">
+			<p class="text-neutral-700 dark:text-neutral-300">The button below changes depending on whether wake lock is
+				active or not.</p>
+			<button
+				class="inline-flex items-center justify-center rounded-full bg-neutral-900 px-5 py-2.5 text-sm font-semibold tracking-wide text-white shadow-sm transition hover:bg-neutral-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2 dark:bg-neutral-100 dark:text-neutral-900 dark:hover:bg-white dark:focus-visible:ring-neutral-200 dark:focus-visible:ring-offset-neutral-950"
+				data-status="off" aria-pressed="false" type="button">
+				Turn Wake Lock ON
+			</button>
 		</section>
 
-		<section id="status">
-			<h2 aria-live="polite">Wake Lock Status...</h2>
+		<section id="status"
+			class="rounded-2xl border border-neutral-200 bg-white p-4 shadow-sm dark:border-neutral-800 dark:bg-neutral-900">
+			<h2 class="text-lg font-semibold" aria-live="polite">Wake Lock Status...</h2>
 		</section>
 
-		<section>
-			<p>Wake lock will automatically release if if the tab becomes inactive.</p>
-			<p>
-				<label>
-					To re-activate the wake lock automatically when the tab becomes active again, check this box: <input
-						type="checkbox" id="reaquire" role="switch" checked />
-				</label>
-			</p>
+		<section
+			class="space-y-4 rounded-2xl border border-neutral-200 bg-white p-4 shadow-sm dark:border-neutral-800 dark:bg-neutral-900">
+			<p class="text-neutral-700 dark:text-neutral-300">Wake lock will automatically release if if the tab becomes
+				inactive.</p>
+			<label class="flex flex-col gap-3 text-sm text-neutral-700 dark:text-neutral-300">
+				<span class="inline-flex items-center gap-3">
+					<input class="sr-only peer" type="checkbox" id="reacquire" role="switch" checked />
+					<span
+						class="relative inline-flex h-6 w-11 items-center rounded-full bg-neutral-300 transition-colors duration-200 after:inline-block after:h-5 after:w-5 after:translate-x-1 after:rounded-full after:bg-white after:shadow after:transition-transform after:duration-200 after:content-[''] peer-focus-visible:outline-none peer-focus-visible:ring-2 peer-focus-visible:ring-neutral-900 peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-white peer-checked:bg-emerald-600 peer-checked:after:translate-x-5 dark:bg-neutral-700 dark:peer-focus-visible:ring-neutral-100 dark:peer-focus-visible:ring-offset-neutral-900"></span>
+					<span class="text-sm font-medium text-neutral-900 dark:text-neutral-100">Auto re-acquire</span>
+				</span>
+			</label>
 		</section>
 	</main>
 </body>
