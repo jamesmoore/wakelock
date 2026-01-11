@@ -5,7 +5,7 @@ const statusElem = document.querySelector('#status h2');
 // toggle button
 const wakeButton = document.querySelector('[data-status]');
 // checkbox
-const reaquireCheck = document.querySelector('#reaquire');
+const reacquireCheck = document.querySelector('#reacquire');
 
 // change button and status if wakelock becomes aquired or is released
 const changeUI = (status = 'acquired') => {
@@ -80,15 +80,15 @@ if (isSupported) {
     }
   }
 
-  const reaquireCheckHandler = () => {
-    if (reaquireCheck.checked) {
+  const reacquireCheckHandler = () => {
+    if (reacquireCheck.checked) {
       document.addEventListener('visibilitychange', handleVisibilityChange);
     } else {
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     }
   }
 
-  reaquireCheck.addEventListener('change', reaquireCheckHandler);
+  reacquireCheck.addEventListener('change', reacquireCheckHandler);
 
-  reaquireCheckHandler();
+  reacquireCheckHandler();
 } // isSupported
