@@ -17,6 +17,7 @@ const changeUI = (status = 'acquired') => {
   statusElem.classList.remove('wake-on', 'wake-off');
   statusElem.classList.add(acquired ? 'wake-on' : 'wake-off');
   document.title = acquired ? "✅ Wake Lock ON" : "❌ Wake Lock OFF";
+  reacquireCheck.disabled = !acquired;
 }
 
 // test support
@@ -27,12 +28,15 @@ if ('wakeLock' in navigator) {
   statusElem.textContent = 'Screen Wake Lock API supported 🎉';
 } else {
   wakeButton.disabled = true;
+  reacquireCheck.disabled = true;
   statusElem.textContent = '⚠️ Wake lock is not supported by this browser.';
 }
 
 if (isSupported) {
   // create a reference for the wake lock
   let wakeLock = null;
+
+  reacquireCheck.disabled = true;
 
   // create an async function to request a wake lock
   const requestWakeLock = async () => {
