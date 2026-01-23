@@ -44,6 +44,6 @@ services:
   wakelock:
     image: ghcr.io/jamesmoore/wakelock:main
     restart: unless-stopped
-# run as non-root user (optional)
+    # run as non-root user (optional)
     user: 555:555
 ```
