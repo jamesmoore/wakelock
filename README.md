@@ -10,20 +10,40 @@ The wake lock will be maintained so long as the browser tab is
 
 # Usage
 Docker compose:
+```yaml
+services:
+  wakelock:
+    image: ghcr.io/jamesmoore/wakelock:main
+    restart: unless-stopped
+    ports:
+      - 80:80
 ```
+
+Once the server is running you should be able to access it on port 80 by default, or whatever you have mapped it to.
+
+# Reverse proxy
+You can also run it behind a reverse proxy like Traefik, Caddy or Nginx. Here is a Traefik example with labels:
+
+```yaml
 services:
   wakelock:
     image: ghcr.io/jamesmoore/wakelock:main
     restart: unless-stopped
     labels:
-# traefik reverse proxy (optional)
       - traefik.http.services.wakelock.loadbalancer.server.port=80
       - traefik.http.routers.wakelock.rule=Host(`wakelock.$DOMAIN`)
       - traefik.http.routers.wakelock.tls=true
       - traefik.http.routers.wakelock.entrypoints=websecure
-# run as non-root user (optional)
-    user: 555:555
 ```
 
-Once the server is running you should be able to access it on port 80 by default, or whetaver you have mapped it to.
+# Permissions
+This container does not require any special privileges. You can run it as a non-root user:
 
+```yaml
+services:
+  wakelock:
+    image: ghcr.io/jamesmoore/wakelock:main
+    restart: unless-stopped
+    # run as non-root user (optional)
+    user: 555:555
+```
