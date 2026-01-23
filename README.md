@@ -19,7 +19,7 @@ services:
       - 80:80
 ```
 
-Once the server is running you should be able to access it on port 80 by default, or whetaver you have mapped it to.
+Once the server is running you should be able to access it on port 80 by default, or whatever you have mapped it to.
 
 # Reverse proxy
 You can also run it behind a reverse proxy like Traefik, Caddy or Nginx. Here is a Traefik example with labels:
