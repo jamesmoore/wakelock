@@ -27,6 +27,3 @@ services:
 
 Once the server is running you should be able to access it on port 80 by default, or whetaver you have mapped it to.
 
-You can then run it as a PWA:
-
-![image](https://github.com/user-attachments/assets/77a024b3-bbe4-43a6-99b1-03fb086d28e4)
