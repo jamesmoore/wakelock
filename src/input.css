@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+	--wake-on: theme(colors.emerald.600);
+	--wake-off: theme(colors.red.600);
+}
+
+.wake-on {
+	transition: color 0.3s ease-in-out;
+	color: var(--wake-on);
+}
+
+.wake-off {
+	transition: color 0.3s ease-in-out;
+	color: var(--wake-off);
+}

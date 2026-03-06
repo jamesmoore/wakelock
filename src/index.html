@@ -8,26 +8,8 @@
 	<link href="manifest.webmanifest" rel="manifest" />
 	<title>Wake Lock</title>
 
-	<script src="https://cdn.tailwindcss.com"></script>
+	<link rel="stylesheet" href="tailwind.css">
 	<script src="script.js" defer></script>
-	<style type="text/tailwindcss">
-		:root {
-			--wake-on: theme(colors.emerald.600);
-			--wake-off: theme(colors.red.600);
-		}
-	</style>
-
-	<style>
-		.wake-on {
-			transition: color 0.3s ease-in-out;
-			color: var(--wake-on);
-		}
-
-		.wake-off {
-			transition: color 0.3s ease-in-out;
-			color: var(--wake-off);
-		}
-	</style>
 </head>
 
 <body class="min-h-screen bg-neutral-50 text-neutral-900 antialiased dark:bg-neutral-950 dark:text-neutral-100">
