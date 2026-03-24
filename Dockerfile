@@ -21,4 +21,6 @@ WORKDIR /home/static
 COPY --from=builder /build/src/ .
 
 # Run BusyBox httpd
+HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 CMD wget --spider -q http://localhost:80/ || exit 1
+
 CMD ["busybox", "httpd", "-f", "-v", "-p", "80"]
