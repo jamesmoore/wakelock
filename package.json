@@ -6,6 +6,6 @@
     "dev": "npx http-server -o ./src/"
   },
   "devDependencies": {
-    "tailwindcss": "^3.4.19"
+    "tailwindcss": "^4.2.4"
   }
 }
