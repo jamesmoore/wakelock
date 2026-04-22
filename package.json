@@ -2,7 +2,8 @@
   "name": "wakelock",
   "version": "1.0.0",
   "scripts": {
-    "build": "tailwindcss -i src/input.css -o src/tailwind.css --minify"
+    "build": "tailwindcss -i src/input.css -o src/tailwind.css --minify",
+    "dev": "npx http-server -o ./src/"
   },
   "devDependencies": {
     "tailwindcss": "^3.4.19"
