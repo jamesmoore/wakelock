@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 :root {
-	--wake-on: theme(colors.emerald.600);
-	--wake-off: theme(colors.red.600);
+	--wake-on: var(--color-emerald-600);
+	--wake-off: var(--color-red-600);
 }
 
 .wake-on {
