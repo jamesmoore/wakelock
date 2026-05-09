@@ -1,7 +1,11 @@
 {
   "name": "Wakelock",
   "short_name": "Wakelock",
+  "id": "./",
   "start_url": "./",
+  "launch_handler": {
+    "client_mode": "focus-existing"
+  },
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#222222",
