@@ -9,6 +9,13 @@ The wake lock will be maintained so long as the browser tab is
 * not behind another browser tab (install as a PWA to avoid this)
 
 # Usage
+
+## Hosted on Github
+
+https://jamesmoore.github.io/wakelock/
+
+## Self hosted
+
 Docker compose:
 ```yaml
 services:
@@ -21,7 +28,7 @@ services:
 
 Once the server is running you should be able to access it on port 80 by default, or whatever you have mapped it to.
 
-# Reverse proxy
+### Reverse proxy
 You can also run it behind a reverse proxy like Traefik, Caddy or Nginx. Here is a Traefik example with labels:
 
 ```yaml
@@ -36,7 +43,7 @@ services:
       - traefik.http.routers.wakelock.entrypoints=websecure
 ```
 
-# Permissions
+### Permissions
 This container does not require any special privileges. You can run it as a non-root user:
 
 ```yaml
