@@ -1,5 +1,9 @@
 console.clear();
 
+const isStandalone =
+  window.matchMedia('(display-mode: standalone)').matches ||
+  window.navigator.standalone === true;
+
 // status paragraph
 const statusElem = document.querySelector('#status h2');
 // toggle button
@@ -11,12 +15,14 @@ const reacquireCheck = document.querySelector('#reacquire');
 const changeUI = (status = 'acquired') => {
   const acquired = status === 'acquired' ? true : false;
   wakeButton.dataset.status = acquired ? 'on' : 'off';
-  wakeButton.textContent = `Turn Wake Lock ${acquired ? 'OFF' : 'ON'}`;
+  wakeButton.textContent = `Turn wake lock ${acquired ? 'off' : 'on'}`;
   wakeButton.setAttribute('aria-pressed', acquired.toString());
-  statusElem.textContent = `${acquired ? '✅' : '❌'} Wake Lock ${acquired ? 'is active!' : 'has been released.'}`;
+  statusElem.textContent = `${acquired ? '✅' : '❌'} Wake lock ${acquired ? 'is active.' : 'has been released.'}`;
   statusElem.classList.remove('wake-on', 'wake-off');
   statusElem.classList.add(acquired ? 'wake-on' : 'wake-off');
-  document.title = acquired ? "✅ Wake Lock ON" : "❌ Wake Lock OFF";
+  document.title = isStandalone
+  ? acquired ? '✅ ON' : '❌ OFF'
+  : acquired ? '✅ Wake lock on' : '❌ Wake lock off';
   reacquireCheck.disabled = !acquired;
 }
 
@@ -25,11 +31,11 @@ let isSupported = false;
 
 if ('wakeLock' in navigator) {
   isSupported = true;
-  statusElem.textContent = 'Screen Wake Lock API supported 🎉';
+  statusElem.textContent = 'Wake lock is supported.';
 } else {
   wakeButton.disabled = true;
   reacquireCheck.disabled = true;
-  statusElem.textContent = '⚠️ Wake lock is not supported by this browser.';
+  statusElem.textContent = '⚠️ This browser does not support wake lock.';
 }
 
 if (isSupported) {
@@ -59,7 +65,7 @@ if (isSupported) {
     } catch (err) {
       // if wake lock request fails - usually system related, such as battery
       wakeButton.dataset.status = 'off';
-      wakeButton.textContent = 'Turn Wake Lock ON';
+      wakeButton.textContent = 'Turn wake lock on';
       statusElem.textContent = `${err.name}, ${err.message}`;
 
     }
